@@ -1,0 +1,10 @@
+target 'DPLoadingButton', :exclusive => true do
+  pod "DPLoadingButton", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+  pod "DPLoadingButton", :path => "../"
+
+  pod 'Specta', '~> 0.2.1'
+  pod 'Expecta'
+end
