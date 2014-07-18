@@ -7,6 +7,7 @@
 //
 
 #import "DPViewController.h"
+#import <DPLoadingButton/DPLoadingButton.h>
 
 @interface DPViewController ()
 
@@ -17,7 +18,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	
+    DPLoadingButton *button = [[DPLoadingButton alloc] initWithFrame:CGRectMake(100, 100, 200, 200)];
+    [button setBackgroundColor:[UIColor redColor]];
+    [button startAnimating];
+    [[self view] addSubview:button];
 }
 
 - (void)didReceiveMemoryWarning
