@@ -17,14 +17,14 @@ Pod::Spec.new do |s|
                        * Markdown format.
                        * Don't worry about the indent, we strip it!
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/DPLoadingButton"
+  s.homepage         = "https://github.com/danielpetroianu/DPLoadingButton"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "Petroianu Daniel" => "petroianudaniel@gmail.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/DPLoadingButton.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => "https://github.com/danielpetroianu/DPLoadingButton.git", :tag => s.version.to_s }
+  # s.social_media_url = 'https://twitter.com/danielpetroianu'
 
-  s.platform     = :ios, '7.0'
+  s.platform     = :ios, '6.0'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes'

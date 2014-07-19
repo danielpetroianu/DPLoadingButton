@@ -1,6 +1,6 @@
 # DPLoadingButton
 
-[![CI Status](http://img.shields.io/travis/Petroianu Daniel/DPLoadingButton.svg?style=flat)](https://travis-ci.org/Petroianu Daniel/DPLoadingButton)
+[![CI Status](http://img.shields.io/travis/danielpetroianu/DPLoadingButton.svg?style=flat)](https://travis-ci.org/danielpetroianu/DPLoadingButton)
 [![Version](https://img.shields.io/cocoapods/v/DPLoadingButton.svg?style=flat)](http://cocoadocs.org/docsets/DPLoadingButton)
 [![License](https://img.shields.io/cocoapods/l/DPLoadingButton.svg?style=flat)](http://cocoadocs.org/docsets/DPLoadingButton)
 [![Platform](https://img.shields.io/cocoapods/p/DPLoadingButton.svg?style=flat)](http://cocoadocs.org/docsets/DPLoadingButton)
