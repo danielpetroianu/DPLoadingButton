@@ -16,12 +16,47 @@
 
 @implementation DPLoadingButton
 
-#pragma mark - private methods
+- (instancetype)initWithImage:(UIImage *)image
+{
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:image];
+    
+    return [self initWithCustomView:imgView];
+}
+
+- (instancetype)initWithTitle:(NSString *)title
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    [label setBackgroundColor:[UIColor clearColor]];
+    [label setText:title];
+    [label sizeToFit];
+    
+    return [self initWithCustomView:label];
+}
+
+- (instancetype)initWithCustomView:(UIView *)view
+{
+    if([self initWithFrame:[view frame]])
+    {
+        [view setTag:1010];
+        [self addSubview:view];
+    }
+    
+    return self;
+}
+
+#pragma mark - Life Cycle
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
-    if (self) {
+    if (self = [super initWithFrame:frame]) {
+        [self setupControl];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
         [self setupControl];
     }
     return self;
@@ -29,9 +64,10 @@
 
 - (void)setupControl
 {
-    [self setActivityIndicatorView:[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite]];
-    [self addSubview:[self activityIndicatorView]];
+    [self createSubviews];
+    [self bindEvents];
 }
+
 
 - (void)layoutSubviews
 {
@@ -42,16 +78,43 @@
 
 
 
-#pragma mark - public methods
+#pragma mark - Properties
 
 - (void)startAnimating
 {
-    [[self activityIndicatorView] startAnimating];
+    [UIView animateWithDuration:0.5 animations:^{
+        [[self viewWithTag:1010] setAlpha:0.2];
+    } completion:^(BOOL finished) {
+        [[self activityIndicatorView] startAnimating];
+    }];
 }
 
 - (void)stopAnimating
 {
     [[self activityIndicatorView] stopAnimating];
+    [UIView animateWithDuration:0.5 animations:^{
+        [[self viewWithTag:1010] setAlpha:1];
+    }];
+}
+
+#pragma mark - helpers
+
+- (void)createSubviews {
+    [self setActivityIndicatorView:[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite]];
+    [self addSubview:[self activityIndicatorView]];
+}
+
+- (void)bindEvents {
+    [self addTarget:self action:@selector(buttonWasTapped:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)buttonWasTapped:(id) sender
+{
+    if(_onButtonTap){
+        [self startAnimating];
+        
+        _onButtonTap(self);
+    }
 }
 
 @end
