@@ -1,4 +1,4 @@
-# DPLoadingButton
+<h1><img src="https://raw.githubusercontent.com/danielpetroianu/DPLoadingButton/master/Example/DPLoadingButton/Images.xcassets/AppIcon.appiconset/AppIcon29x29@2x.png" alt="DPLoadingButton"/> DPLoadingButton</h1>
 
 [![CI Status](http://img.shields.io/travis/danielpetroianu/DPLoadingButton.svg?style=flat)](https://travis-ci.org/danielpetroianu/DPLoadingButton)
 [![Version](https://img.shields.io/cocoapods/v/DPLoadingButton.svg?style=flat)](http://cocoadocs.org/docsets/DPLoadingButton)
@@ -25,4 +25,3 @@ Petroianu Daniel, petroianudaniel@gmail.com
 ## License
 
 DPLoadingButton is available under the MIT license. See the LICENSE file for more info.
-
