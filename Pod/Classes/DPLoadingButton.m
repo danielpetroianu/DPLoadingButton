@@ -8,6 +8,13 @@
 
 #import "DPLoadingButton.h"
 
+#define dp_dispatch_main_async_safe(block)\
+        if ([NSThread isMainThread]) {\
+            block();\
+        } else {\
+            dispatch_async(dispatch_get_main_queue(), block);\
+        }
+
 @interface DPLoadingButton ()
 
 @property(nonatomic, strong, readwrite) UIActivityIndicatorView *activityIndicatorView;
@@ -39,6 +46,9 @@
     {
         [view setTag:1010];
         [self addSubview:view];
+
+        [self createSubviews];
+        [self bindEvents];
     }
     
     return self;
@@ -48,24 +58,12 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    if (self = [super initWithFrame:frame]) {
-        [self setupControl];
-    }
-    return self;
+    return (self = [super initWithFrame:frame]);
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-    if (self = [super initWithCoder:aDecoder]) {
-        [self setupControl];
-    }
-    return self;
-}
-
-- (void)setupControl
-{
-    [self createSubviews];
-    [self bindEvents];
+    return (self = [super initWithCoder:aDecoder]);
 }
 
 
@@ -77,24 +75,32 @@
 }
 
 
-
 #pragma mark - Properties
 
 - (void)startAnimating
 {
-    [UIView animateWithDuration:0.5 animations:^{
-        [[self viewWithTag:1010] setAlpha:0.2];
-    } completion:^(BOOL finished) {
-        [[self activityIndicatorView] startAnimating];
-    }];
+    dp_dispatch_main_async_safe(^{
+        [self setEnabled:NO];
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            [[self viewWithTag:1010] setAlpha:0.2];
+        } completion:^(BOOL finished) {
+            [[self activityIndicatorView] startAnimating];
+        }];
+    });
 }
 
 - (void)stopAnimating
 {
-    [[self activityIndicatorView] stopAnimating];
-    [UIView animateWithDuration:0.5 animations:^{
-        [[self viewWithTag:1010] setAlpha:1];
-    }];
+    dp_dispatch_main_async_safe(^{
+        [[self activityIndicatorView] stopAnimating];
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            [[self viewWithTag:1010] setAlpha:1];
+        } completion:^(BOOL finished) {
+            [self setEnabled:YES];
+        }];
+    });
 }
 
 #pragma mark - helpers

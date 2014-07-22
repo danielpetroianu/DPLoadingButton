@@ -19,26 +19,17 @@
 {
     [super viewDidLoad];
 	
-    DPLoadingButton *button = [[DPLoadingButton alloc] initWithTitle:@"ceva mare"];
-    [button setCenter:[[self view] center]];
-    [[button activityIndicatorView] setColor:[UIColor redColor]];
-//    [button setBackgroundColor:[UIColor redColor]];
-    
+    DPLoadingButton *button = [[DPLoadingButton alloc] initWithTitle:@"do something"];
+    [[button activityIndicatorView] setColor:[UIColor blackColor]];
     
     [button setOnButtonTap:^(DPLoadingButton *button){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSLog(@"button was tapped");
             [NSThread sleepForTimeInterval:5];
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [button stopAnimating];
-            });
+            [button stopAnimating];
         });
     }];
-    
-    
-    
-//    [[self view] addSubview:button];
     
     [[self navigationItem] setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:button]];
 }

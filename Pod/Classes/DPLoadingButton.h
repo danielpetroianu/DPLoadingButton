@@ -25,7 +25,6 @@ typedef void (^DPLoadingButtonAction)(DPLoadingButton *button) ;
 - (instancetype)initWithCustomView:(UIView *)view;
 
 - (void)startAnimating;
-
 - (void)stopAnimating;
 
 @end
