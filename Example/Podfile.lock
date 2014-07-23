@@ -13,7 +13,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  DPLoadingButton: cbbbb5151cfaaab8b0e219ae94ea97514cdf08a9
+  DPLoadingButton: 7dc782d8dff99a031a6f413db87433ec3d1f0762
   Expecta: 03aabd0a89d8dea843baecb19a7fd7466a69a31d
   Specta: 9141310f46b1f68b676650ff2854e1ed0b74163a
 

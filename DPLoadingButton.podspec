@@ -1,11 +1,3 @@
-#
-# Be sure to run `pod lib lint DPLoadingButton.podspec' to ensure this is a
-# valid spec and remove all comments before submitting the spec.
-#
-# Any lines starting with a # are optional, but encouraged
-#
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
 
 Pod::Spec.new do |s|
   s.name                = "DPLoadingButton"
@@ -26,13 +18,7 @@ Pod::Spec.new do |s|
 
   s.frameworks          = 'UIKit'
   
-  s.public_header_files = 'Pod/Classes/DPLoadingButton.h'
-  s.source_files        = 'Pod/Classes/DPLoadingButton.m'
+  s.public_header_files = 'Pod/Classes/*.h'
+  s.source_files        = 'Pod/Classes'
   
-  s.subspec 'UIKit' do |ss|
-
-    ss.ios.public_header_files  = 'Pod/Classes/DPLoadingButton+UIKit.h'
-    ss.ios.source_files         = 'Pod/Classes/DPLoadingButton+UIKit.m'
-
-  end
 end

@@ -7,7 +7,7 @@
 //
 
 #import "DPLoadingButton.h"
-#import <UIKit/UIBarButtonItem.h>
+#import <UIKit/UIKit.h>
 
 @interface DPLoadingButton (UIKit)
 
