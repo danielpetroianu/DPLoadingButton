@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name                = "DPLoadingButton"
-  s.version             = "0.0.1"
+  s.version             = "0.1.0"
   s.license             = 'MIT'
   s.summary             = "Button like control with UIActivityIndicatorView as subview"
   s.description         = <<-DESC
