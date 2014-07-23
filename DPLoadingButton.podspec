@@ -8,29 +8,31 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = "DPLoadingButton"
-  s.version          = "0.1.0"
-  s.summary          = "A short description of DPLoadingButton."
-  s.description      = <<-DESC
-                       An optional longer description of DPLoadingButton
+  s.name                = "DPLoadingButton"
+  s.version             = "0.0.1"
+  s.license             = 'MIT'
+  s.summary             = "Button like control with UIActivityIndicatorView as subview"
+  s.description         = <<-DESC
+                          DPLoadingButton is a button like control, that will display an UIActivityIndicatorView until the action is over
+                          DESC
+  s.homepage            = "https://github.com/danielpetroianu/DPLoadingButton"
+  s.authors             = { "Petroianu Daniel" => "petroianudaniel@gmail.com" }
+  s.social_media_url    = 'https://twitter.com/danielpetroianu'
+  s.screenshots         = "https://raw.githubusercontent.com/danielpetroianu/DPLoadingButton/master/Example/Screenshots/DPLoadingButton.gif"
 
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
-                       DESC
-  s.homepage         = "https://github.com/danielpetroianu/DPLoadingButton"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
-  s.license          = 'MIT'
-  s.author           = { "Petroianu Daniel" => "petroianudaniel@gmail.com" }
-  s.source           = { :git => "https://github.com/danielpetroianu/DPLoadingButton.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/danielpetroianu'
+  s.platform            = :ios, '6.0'
+  s.requires_arc        = true
+  s.source              = { :git => "https://github.com/danielpetroianu/DPLoadingButton.git", :tag => s.version.to_s }
 
-  s.platform     = :ios, '6.0'
-  s.requires_arc = true
+  s.frameworks          = 'UIKit'
+  
+  s.public_header_files = 'Pod/Classes/DPLoadingButton.h'
+  s.source_files        = 'Pod/Classes/DPLoadingButton.m'
+  
+  s.subspec 'UIKit' do |ss|
 
-  s.source_files = 'Pod/Classes'
-  s.resources = 'Pod/Assets/*.png'
+    ss.ios.public_header_files  = 'Pod/Classes/DPLoadingButton+UIKit.h'
+    ss.ios.source_files         = 'Pod/Classes/DPLoadingButton+UIKit.m'
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  end
 end
