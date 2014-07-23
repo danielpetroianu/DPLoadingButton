@@ -5,17 +5,20 @@
 [![License](https://img.shields.io/cocoapods/l/DPLoadingButton.svg?style=flat)](http://cocoadocs.org/docsets/DPLoadingButton)
 [![Platform](https://img.shields.io/cocoapods/p/DPLoadingButton.svg?style=flat)](http://cocoadocs.org/docsets/DPLoadingButton)
 
+## Preview
+
+<img src="https://raw.githubusercontent.com/danielpetroianu/DPLoadingButton/master/Example/Screenshots/DPLoadingButton.gif" alt="DPLoadingButton Gif" />
+
 ## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
 
 ## Installation
 
 DPLoadingButton is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
+    platform :ios, "6.0"
     pod "DPLoadingButton"
 
 ## Author
@@ -25,3 +28,7 @@ Petroianu Daniel, petroianudaniel@gmail.com
 ## License
 
 DPLoadingButton is available under the MIT license. See the LICENSE file for more info.
+
+##To Do
+
+- Test
