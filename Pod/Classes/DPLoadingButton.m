@@ -18,6 +18,9 @@
 @interface DPLoadingButton ()
 
 @property(nonatomic, strong, readwrite) UIActivityIndicatorView *activityIndicatorView;
+@property(nonatomic, strong, readwrite) UILabel *titleLable;
+
+@property(nonatomic, weak) UIView *buttonView;
 
 @end
 
@@ -32,20 +35,21 @@
 
 - (instancetype)initWithTitle:(NSString *)title
 {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-    [label setBackgroundColor:[UIColor clearColor]];
-    [label setText:title];
-    [label sizeToFit];
+    [self setTitleLable:[[UILabel alloc] initWithFrame:CGRectZero]];
+    [[self titleLable] setBackgroundColor:[UIColor clearColor]];
+    [[self titleLable] setText:title];
+    [[self titleLable] sizeToFit];
     
-    return [self initWithCustomView:label];
+    return [self initWithCustomView:[self titleLable]];
 }
 
 - (instancetype)initWithCustomView:(UIView *)view
 {
     if([self initWithFrame:[view frame]])
     {
-        [view setTag:1010];
+        [view setUserInteractionEnabled:NO];
         [self addSubview:view];
+        [self setButtonView:view];
 
         [self createSubviews];
         [self bindEvents];
@@ -83,7 +87,7 @@
         [self setEnabled:NO];
         
         [UIView animateWithDuration:0.5 animations:^{
-            [[self viewWithTag:1010] setAlpha:0.2];
+            [[self buttonView] setAlpha:0.2];
         } completion:^(BOOL finished) {
             [[self activityIndicatorView] startAnimating];
         }];
@@ -96,7 +100,7 @@
         [[self activityIndicatorView] stopAnimating];
         
         [UIView animateWithDuration:0.5 animations:^{
-            [[self viewWithTag:1010] setAlpha:1];
+            [[self buttonView] setAlpha:1];
         } completion:^(BOOL finished) {
             [self setEnabled:YES];
         }];

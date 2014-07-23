@@ -16,7 +16,7 @@ typedef void (^DPLoadingButtonAction)(DPLoadingButton *button) ;
 @interface DPLoadingButton : UIControl
 
 @property(nonatomic, strong, readonly) UIActivityIndicatorView *activityIndicatorView;
-@property(nonatomic, strong) UIImage *image;
+@property(nonatomic, strong, readonly) UILabel *titleLable;
 
 @property(nonatomic, copy) DPLoadingButtonAction onButtonTap;
 
