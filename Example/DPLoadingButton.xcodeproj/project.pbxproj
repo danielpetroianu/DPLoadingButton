@@ -22,6 +22,7 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		6B5530FE198043330064AD74 /* DPCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B5530FC198043330064AD74 /* DPCustomView.xib */; };
 		8F161D5A14FF4CDFB666B803 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 487B652341C148BD9F726D0B /* libPods-Tests.a */; };
 		FD038FA1662F4A47A7F44C3E /* libPods-DPLoadingButton.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B91FC637BC74F3FAF66E33C /* libPods-DPLoadingButton.a */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,7 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		6B5530FC198043330064AD74 /* DPCustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DPCustomView.xib; sourceTree = "<group>"; };
 		7B91FC637BC74F3FAF66E33C /* libPods-DPLoadingButton.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DPLoadingButton.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D371F04EC045FABBC024CE /* DPLoadingButton.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = DPLoadingButton.podspec; path = ../DPLoadingButton.podspec; sourceTree = "<group>"; };
 		99E82103D69C4F06826DBF29 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -131,10 +133,9 @@
 		6003F593195388D20070C39A /* DPLoadingButton */ = {
 			isa = PBXGroup;
 			children = (
+				6B5530FF198046F00064AD74 /* Views */,
 				6003F59C195388D20070C39A /* DPAppDelegate.h */,
 				6003F59D195388D20070C39A /* DPAppDelegate.m */,
-				6003F59F195388D20070C39A /* Main_iPhone.storyboard */,
-				6003F5A2195388D20070C39A /* Main_iPad.storyboard */,
 				6003F5A5195388D20070C39A /* DPViewController.h */,
 				6003F5A6195388D20070C39A /* DPViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
@@ -181,6 +182,16 @@
 				30FC59D2AB9645F6BD426087 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		6B5530FF198046F00064AD74 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6B5530FC198043330064AD74 /* DPCustomView.xib */,
+				6003F59F195388D20070C39A /* Main_iPhone.storyboard */,
+				6003F5A2195388D20070C39A /* Main_iPad.storyboard */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,6 +277,7 @@
 			files = (
 				6003F5A4195388D20070C39A /* Main_iPad.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				6B5530FE198043330064AD74 /* DPCustomView.xib in Resources */,
 				6003F5A1195388D20070C39A /* Main_iPhone.storyboard in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);

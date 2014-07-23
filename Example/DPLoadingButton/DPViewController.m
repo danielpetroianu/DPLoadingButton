@@ -8,9 +8,10 @@
 
 #import "DPViewController.h"
 #import <DPLoadingButton/DPLoadingButton.h>
+#import <DPLoadingButton/DPLoadingButton+UIKit.h>
 
 @interface DPViewController ()
-
+@property(nonatomic, weak) IBOutlet DPLoadingButton *brewCoffeeButton;
 @end
 
 @implementation DPViewController
@@ -18,20 +19,86 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-    DPLoadingButton *button = [[DPLoadingButton alloc] initWithTitle:@"do something"];
-    [[button activityIndicatorView] setColor:[UIColor blackColor]];
     
-    [button setOnButtonTap:^(DPLoadingButton *button){
+    [[self navigationItem] setLeftBarButtonItem:[self createLeftBarButtonItem]];
+	[[self navigationItem] setRightBarButtonItem:[self createRightBarButtonItem]];
+    
+    DPLoadingButton *customViewButton = [self createCustomViewButton];
+    [[self view] addSubview:customViewButton];
+    [self setBrewCoffeeButton:customViewButton];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+                                         duration:(NSTimeInterval)duration
+{
+    [[self brewCoffeeButton] setCenter:[[self view] center]];
+}
+
+
+
+
+- (UIBarButtonItem *)createLeftBarButtonItem {
+    NSString *title = @"work";
+    DPLoadingButton *leftButton = [[DPLoadingButton alloc] initWithTitle:title];
+    [[leftButton titleLable] setTextColor:[UIColor redColor]];
+    [[leftButton activityIndicatorView] setColor:[UIColor redColor]];
+    [leftButton setOnButtonTap:^(DPLoadingButton *button){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSLog(@"button was tapped");
-            [NSThread sleepForTimeInterval:5];
+            NSLog(@"left button was tapped");
+            [NSThread sleepForTimeInterval:6];
             
             [button stopAnimating];
         });
     }];
     
-    [[self navigationItem] setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:button]];
+    return [leftButton toBarButtonItem];
 }
+
+- (UIBarButtonItem *)createRightBarButtonItem {
+    UIImage *image = [UIImage imageNamed:@"coffee"];
+    DPLoadingButton *rightButton = [[DPLoadingButton alloc] initWithImage:image];
+    [[rightButton activityIndicatorView] setColor:[UIColor blackColor]];
+    
+    [rightButton setOnButtonTap:^(DPLoadingButton *button){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSLog(@"right button was tapped");
+            [NSThread sleepForTimeInterval:2];
+            
+            [button stopAnimating];
+        });
+    }];
+    
+    return [rightButton toBarButtonItem];
+}
+
+- (DPLoadingButton *)createCustomViewButton {
+    UINib *nib = [UINib nibWithNibName:@"DPCustomView" bundle:nil];
+    UIView *customView = [[nib instantiateWithOwner:nil options:nil] firstObject];
+    
+    DPLoadingButton *button = [[DPLoadingButton alloc] initWithCustomView:customView];
+    [[button activityIndicatorView] setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [[button activityIndicatorView] setColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]];
+    
+    [button setCenter:[[self view] center]];
+    
+    [button setOnButtonTap:^(DPLoadingButton *button){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSLog(@"custom view buton was tapped");
+            [NSThread sleepForTimeInterval:2];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [button stopAnimating];
+                
+                UIAlertView *alertView = [[UIAlertView alloc] init];
+                [alertView setMessage:@"Go get your coffee."];
+                [alertView addButtonWithTitle:@"I'm going"];
+                [alertView show];
+            });
+        });
+    }];
+    
+    return button;
+}
+
 
 @end
