@@ -31,4 +31,6 @@ DPLoadingButton is available under the MIT license. See the LICENSE file for mor
 
 ##To Do
 
-- Test
+- write unit test
+- create subspec for AFNetworking
+- create subspec for PromiseKit
