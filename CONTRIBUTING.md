@@ -3,7 +3,7 @@
 
 ## Issues
 * Include screenshots and animated GIFs whenever possible, they are immensely helpful.
-
+* Include stack traces whenever possible 
 
 ## Git Commit Messages
 * Use the present tense
