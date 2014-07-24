@@ -107,7 +107,7 @@
     });
 }
 
-#pragma mark - helpers
+#pragma mark - Helpers
 
 - (void)createSubviews {
     [self setActivityIndicatorView:[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite]];
