@@ -11,7 +11,11 @@
 
 ## Usage
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+Use `pod try DPLoadingButton` to run the example project 
+
+or
+
+clone the repo, and run `pod install` from the Example directory first
 
 ## Installation
 
