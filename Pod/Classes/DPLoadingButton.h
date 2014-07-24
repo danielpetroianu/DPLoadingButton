@@ -13,6 +13,9 @@
 typedef void (^DPLoadingButtonAction)(DPLoadingButton *button) ;
 
 
+/**
+ A 'button like' control that displayes a UIActivityIndicatorView when the button is tapped.
+ */
 @interface DPLoadingButton : UIControl
 
 /**
@@ -40,7 +43,8 @@ typedef void (^DPLoadingButtonAction)(DPLoadingButton *button) ;
 
 
 /**
- Register a block of code that will be run when the button is tapped.
+ Register a block of code that will be run when the button is tapped. 
+ The block execution will be done on a background thread.
  */
 @property(nonatomic, copy) DPLoadingButtonAction onButtonTap;
 
@@ -79,13 +83,13 @@ typedef void (^DPLoadingButtonAction)(DPLoadingButton *button) ;
 
 /**
  Calls the startAnimating methond on the activityIndicatorView.
- @discussion This will make sure that the animation is done on the main thread.
+ @discussion This will make sure that the animation is done on the main thread. It will automatically be called before onButtonTap is called.
  */
 - (void)startAnimating;
 
 /**
  Calls the stopAnimating methond on the activityIndicatorView.
- @discussion This will make sure that the animation is done on the main thread.
+ @discussion This will make sure that the animation is done on the main thread. It will automatically be called after onButtonTap is called.
  */
 - (void)stopAnimating;
 

@@ -43,12 +43,8 @@
     [[leftButton titleLable] setTextColor:[UIColor redColor]];
     [[leftButton activityIndicatorView] setColor:[UIColor redColor]];
     [leftButton setOnButtonTap:^(DPLoadingButton *button){
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSLog(@"left button was tapped");
-            [NSThread sleepForTimeInterval:6];
-            
-            [button stopAnimating];
-        });
+        NSLog(@"left button was tapped");
+        [NSThread sleepForTimeInterval:6];
     }];
     
     return [leftButton toBarButtonItem];
@@ -60,12 +56,8 @@
     [[rightButton activityIndicatorView] setColor:[UIColor blackColor]];
     
     [rightButton setOnButtonTap:^(DPLoadingButton *button){
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSLog(@"right button was tapped");
-            [NSThread sleepForTimeInterval:2];
-            
-            [button stopAnimating];
-        });
+        NSLog(@"right button was tapped");
+        [NSThread sleepForTimeInterval:2];
     }];
     
     return [rightButton toBarButtonItem];
@@ -82,18 +74,14 @@
     [button setCenter:[[self view] center]];
     
     [button setOnButtonTap:^(DPLoadingButton *button){
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSLog(@"custom view buton was tapped");
-            [NSThread sleepForTimeInterval:2];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [button stopAnimating];
-                
-                UIAlertView *alertView = [[UIAlertView alloc] init];
-                [alertView setMessage:@"Go get your coffee."];
-                [alertView addButtonWithTitle:@"I'm going"];
-                [alertView show];
-            });
+        NSLog(@"custom view buton was tapped");
+        [NSThread sleepForTimeInterval:2];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alertView = [[UIAlertView alloc] init];
+            [alertView setMessage:@"Go get your coffee."];
+            [alertView addButtonWithTitle:@"I'm going"];
+            [alertView show];
         });
     }];
     
