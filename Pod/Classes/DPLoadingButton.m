@@ -15,7 +15,9 @@
             dispatch_async(dispatch_get_main_queue(), block);\
         }
 
-@interface DPLoadingButton ()
+@interface DPLoadingButton () {
+    DPLoadingButtonAction _onButtonTap;
+}
 
 @property(nonatomic, strong, readwrite) UIActivityIndicatorView *activityIndicatorView;
 @property(nonatomic, strong, readwrite) UILabel *titleLable;
@@ -107,6 +109,11 @@
     });
 }
 
+- (void)onButtonTap:(DPLoadingButtonAction)block
+{
+    _onButtonTap = [block copy];
+}
+
 #pragma mark - Helpers
 
 - (void)createSubviews {
@@ -123,12 +130,15 @@
     if(_onButtonTap){
         [self startAnimating];
         
+        __weak typeof(self) wSelf = self;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            _onButtonTap(self);
+            __strong typeof(self) sSelf = wSelf;
+            _onButtonTap(sSelf);
             
-            [self stopAnimating];
+            [sSelf stopAnimating];
         });
     }
 }
+
 
 @end

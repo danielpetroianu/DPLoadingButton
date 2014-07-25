@@ -42,7 +42,7 @@
     DPLoadingButton *leftButton = [[DPLoadingButton alloc] initWithTitle:title];
     [[leftButton titleLable] setTextColor:[UIColor redColor]];
     [[leftButton activityIndicatorView] setColor:[UIColor redColor]];
-    [leftButton setOnButtonTap:^(DPLoadingButton *button){
+    [leftButton onButtonTap:^(DPLoadingButton *button){
         NSLog(@"left button was tapped");
         [NSThread sleepForTimeInterval:6];
     }];
@@ -55,7 +55,7 @@
     DPLoadingButton *rightButton = [[DPLoadingButton alloc] initWithImage:image];
     [[rightButton activityIndicatorView] setColor:[UIColor blackColor]];
     
-    [rightButton setOnButtonTap:^(DPLoadingButton *button){
+    [rightButton onButtonTap:^(DPLoadingButton *button){
         NSLog(@"right button was tapped");
         [NSThread sleepForTimeInterval:2];
     }];
@@ -73,7 +73,7 @@
     
     [button setCenter:[[self view] center]];
     
-    [button setOnButtonTap:^(DPLoadingButton *button){
+    [button onButtonTap:^(DPLoadingButton *button){
         NSLog(@"custom view buton was tapped");
         [NSThread sleepForTimeInterval:2];
         

@@ -43,12 +43,6 @@ typedef void (^DPLoadingButtonAction)(DPLoadingButton *button) ;
 
 
 /**
- Register a block of code that will be run when the button is tapped. 
- The block execution will be done on a background thread.
- */
-@property(nonatomic, copy) DPLoadingButtonAction onButtonTap;
-
-/**
  Initializes a new item using the specified image.
  
  @param image The image to display in the button.
@@ -80,6 +74,12 @@ typedef void (^DPLoadingButtonAction)(DPLoadingButton *button) ;
  @discussion This method adjusts the frame of the receiver to match the size of the specified view. It also disables user interactions for the custom view by default, so that the tap action on the button could be recognised.
  */
 - (instancetype)initWithCustomView:(UIView *)view;
+
+/**
+ Register a block of code that will be run when the button is tapped.
+ The block execution will be done on a background thread.
+ */
+- (void)onButtonTap:(DPLoadingButtonAction)block;
 
 /**
  Calls the startAnimating methond on the activityIndicatorView.
