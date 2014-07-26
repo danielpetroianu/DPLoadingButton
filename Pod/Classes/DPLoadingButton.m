@@ -54,7 +54,6 @@
         [self setButtonView:view];
 
         [self createSubviews];
-        [self bindEvents];
     }
     
     return self;
@@ -112,6 +111,7 @@
 - (void)onButtonTap:(DPLoadingButtonAction)block
 {
     _onButtonTap = [block copy];
+    [self addTarget:self action:@selector(buttonWasTapped:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark - Helpers
@@ -119,10 +119,6 @@
 - (void)createSubviews {
     [self setActivityIndicatorView:[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite]];
     [self addSubview:[self activityIndicatorView]];
-}
-
-- (void)bindEvents {
-    [self addTarget:self action:@selector(buttonWasTapped:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)buttonWasTapped:(id) sender
