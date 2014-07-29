@@ -47,4 +47,5 @@ profile
 .bundle
 
 Pods/
+Example/Podfile.lock
 
