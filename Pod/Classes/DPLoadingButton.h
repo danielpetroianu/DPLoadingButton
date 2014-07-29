@@ -76,8 +76,10 @@ typedef void (^DPLoadingButtonAction)(DPLoadingButton *button) ;
 - (instancetype)initWithCustomView:(UIView *)view;
 
 /**
- Register a block of code that will be run when the button is tapped.
+ Register a block that will be run when the button is tapped.
  The block execution will be done on a background thread.
+ 
+ @param block A block that will be executed on a background thread when the button is pressed.
  */
 - (void)onButtonTap:(DPLoadingButtonAction)block;
 
@@ -94,3 +96,19 @@ typedef void (^DPLoadingButtonAction)(DPLoadingButton *button) ;
 - (void)stopAnimating;
 
 @end
+
+
+/**
+ UIKit helpers
+ */
+@interface DPLoadingButton (UIKit)
+
+/**
+ Helper method that will return an UIBarButtonItem.
+ 
+ @return A UIBarButtonItem with this DPLoadingButton as it's view.
+ */
+- (UIBarButtonItem *)toBarButtonItem;
+
+@end
+

@@ -28,6 +28,9 @@
 
 @implementation DPLoadingButton
 
+
+#pragma mark - Life Cycle
+
 - (instancetype)initWithImage:(UIImage *)image
 {
     UIImageView *imgView = [[UIImageView alloc] initWithImage:image];
@@ -47,7 +50,7 @@
 
 - (instancetype)initWithCustomView:(UIView *)view
 {
-    if([self initWithFrame:[view frame]])
+    if(self = [self initWithFrame:[view frame]])
     {
         [view setUserInteractionEnabled:NO];
         [self addSubview:view];
@@ -58,19 +61,6 @@
     
     return self;
 }
-
-#pragma mark - Life Cycle
-
-- (id)initWithFrame:(CGRect)frame
-{
-    return (self = [super initWithFrame:frame]);
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    return (self = [super initWithCoder:aDecoder]);
-}
-
 
 - (void)layoutSubviews
 {
@@ -85,12 +75,13 @@
 - (void)startAnimating
 {
     dp_dispatch_main_async_safe(^{
+        [[self activityIndicatorView] setAlpha:0.2];
+        [[self activityIndicatorView] startAnimating];
         [self setEnabled:NO];
         
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.3 animations:^{
             [[self buttonView] setAlpha:0.2];
-        } completion:^(BOOL finished) {
-            [[self activityIndicatorView] startAnimating];
+            [[self activityIndicatorView] setAlpha:1.0];
         }];
     });
 }
@@ -100,7 +91,7 @@
     dp_dispatch_main_async_safe(^{
         [[self activityIndicatorView] stopAnimating];
         
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.3 animations:^{
             [[self buttonView] setAlpha:1];
         } completion:^(BOOL finished) {
             [self setEnabled:YES];
@@ -136,5 +127,14 @@
     }
 }
 
+@end
+
+
+@implementation DPLoadingButton (UIKit)
+
+- (UIBarButtonItem *)toBarButtonItem
+{
+    return [[UIBarButtonItem alloc] initWithCustomView:self];
+}
 
 @end
