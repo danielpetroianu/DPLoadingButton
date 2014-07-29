@@ -17,8 +17,10 @@ Pod::Spec.new do |s|
   s.source              = { :git => "https://github.com/danielpetroianu/DPLoadingButton.git", :tag => s.version.to_s }
 
   s.frameworks          = 'UIKit'
-  
+
+  s.dependency 'AFNetworking', '~> 2.3.1'
+
   s.public_header_files = 'Pod/Classes/*.h'
-  s.source_files        = 'Pod/Classes'
+  s.source_files        = 'Pod/Classes/**/*'
   
 end

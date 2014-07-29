@@ -8,7 +8,6 @@
 
 #import "DPViewController.h"
 #import <DPLoadingButton/DPLoadingButton.h>
-#import <DPLoadingButton/DPLoadingButton+UIKit.h>
 
 @interface DPViewController ()
 @property(nonatomic, weak) IBOutlet DPLoadingButton *brewCoffeeButton;
