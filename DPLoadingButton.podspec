@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   s.name                = "DPLoadingButton"
   s.version             = "0.1.0"
   s.license             = 'MIT'
-  s.summary             = "Button like control with UIActivityIndicatorView as subview"
+  s.summary             = "A 'button like' control that displayes a UIActivityIndicatorView when the button is tapped"
   s.description         = <<-DESC
                           DPLoadingButton is a button like control, that will display an UIActivityIndicatorView until the action is over
                           DESC
@@ -11,16 +11,33 @@ Pod::Spec.new do |s|
   s.authors             = { "Petroianu Daniel" => "petroianudaniel@gmail.com" }
   s.social_media_url    = 'https://twitter.com/danielpetroianu'
   s.screenshots         = "https://raw.githubusercontent.com/danielpetroianu/DPLoadingButton/master/Example/Screenshots/DPLoadingButton.gif"
-
+  
+  s.source              = { :git => "https://github.com/danielpetroianu/DPLoadingButton.git", :tag => s.version.to_s }
   s.platform            = :ios, '6.0'
   s.requires_arc        = true
-  s.source              = { :git => "https://github.com/danielpetroianu/DPLoadingButton.git", :tag => s.version.to_s }
-
   s.frameworks          = 'UIKit'
+  
 
-  s.dependency 'AFNetworking', '~> 2.3.1'
 
-  s.public_header_files = 'Pod/Classes/*.h'
-  s.source_files        = 'Pod/Classes/**/*'
+
+  #
+  # DPLoadingButton/Core
+
+  s.subspec 'Core' do |ss|
+    ss.public_header_files = 'Pod/Classes/Core/*.h'
+    ss.source_files        = 'Pod/Classes/Core'
+  end
+
+
+  # 
+  # DPLoadingButton/AFNetworking
+
+  s.subspec 'AFNetworking' do |ss|
+    ss.dependency 'DPLoadingButton/Core'
+    ss.dependency 'AFNetworking', '~> 2.3.1'
+
+    ss.public_header_files  = 'Pod/Classes/AFNetworking/*.h'
+    ss.source_files         = 'Pod/Classes/AFNetworking'
+  end
   
 end
