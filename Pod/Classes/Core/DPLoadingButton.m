@@ -100,9 +100,19 @@
     });
 }
 
-- (void)addAction:(DPLoadingButtonAction)action forControlEvents:(UIControlEvents)controlEvents
+- (void)addAction:(DPLoadingButtonAction)action
 {
     [self addAction:action withCompletion:nil forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)addAction:(DPLoadingButtonAction)action forControlEvents:(UIControlEvents)controlEvents
+{
+    [self addAction:action withCompletion:nil forControlEvents:controlEvents];
+}
+
+- (void)addAction:(DPLoadingButtonAction)action withCompletion:(DPLoadingButtonCompletionHandler)completionHandler
+{
+    [self addAction:action withCompletion:completionHandler forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)addAction:(DPLoadingButtonAction)action withCompletion:(DPLoadingButtonCompletionHandler)completionHandler forControlEvents:(UIControlEvents)controlEvents

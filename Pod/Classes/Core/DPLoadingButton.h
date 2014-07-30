@@ -82,14 +82,48 @@ typedef void (^DPLoadingButtonCompletionHandler)(DPLoadingButton *button);
 - (instancetype)initWithCustomView:(UIView *)view;
 
 /**
+ Register action blocks that will be executed when the button is tapped (UIControlEventTouchUpInside).
+ 
+ @param  action         A block that will be executed on a background thread on the button 'controlEvents'.
+ 
+ @note   The 'action' block execution will be done on a background thread.
+ 
+ @warning
+    The 'action' is saved in an internal property and it will cause a retain cicle.
+    Use the 'weakSelf' - 'strongSelf' pattern when refering to 'self' inside the blocks.
+    More info: http://blackpixel.com/blog/2014/03/capturing-myself.html
+ */
+- (void)addAction:(DPLoadingButtonAction)action;
+
+/**
  Register action blocks that will be executed when the specified controlEvents happen.
  
  @param  action         A block that will be executed on a background thread on the button 'controlEvents'.
  @param  controlEvents  A bitmask specifying the control events for which the action block is executed. @see UIControlEvents.
  
  @note   The 'action' block execution will be done on a background thread.
+ 
+ @warning
+     The 'action' is saved in an internal property and it will cause a retain cicle.
+     Use the 'weakSelf' - 'strongSelf' pattern when refering to 'self' inside the blocks.
+     More info: http://blackpixel.com/blog/2014/03/capturing-myself.html
  */
 - (void)addAction:(DPLoadingButtonAction)action forControlEvents:(UIControlEvents)controlEvents;
+
+/**
+ Register action blocks that will be executed when the button is tapped (UIControlEventTouchUpInside).
+ 
+ @param  action             A block that will be executed on a background thread on the button 'controlEvents'.
+ @param  completionHandler  A block that will be executed after the action block execution
+ 
+ @note   The 'action' block execution will be done on a background thread and the 'completionHandler' block will be execution will be done on the main thread.
+ 
+ @warning
+ The 'action' and 'completionHandler' are saved in an internal property and it might/will cause a retain cicle.
+ Use the 'weakSelf' - 'strongSelf' pattern when refering to 'self' inside the blocks.
+ More info: http://blackpixel.com/blog/2014/03/capturing-myself.html
+ */
+- (void)addAction:(DPLoadingButtonAction)action withCompletion:(DPLoadingButtonCompletionHandler)completionHandler;
 
 /**
  Register action blocks that will be executed when the specified controlEvents happen.
@@ -99,6 +133,11 @@ typedef void (^DPLoadingButtonCompletionHandler)(DPLoadingButton *button);
  @param  controlEvents      A bitmask specifying the control events for which the action block is executed. @see UIControlEvents.
  
  @note   The 'action' block execution will be done on a background thread and the 'completionHandler' block will be execution will be done on the main thread.
+ 
+ @warning   
+    The 'action' and 'completionHandler' are saved in an internal property and it might/will cause a retain cicle.
+    Use the 'weakSelf' - 'strongSelf' pattern when refering to 'self' inside the blocks.
+    More info: http://blackpixel.com/blog/2014/03/capturing-myself.html
  */
 - (void)addAction:(DPLoadingButtonAction)action withCompletion:(DPLoadingButtonCompletionHandler)completionHandler forControlEvents:(UIControlEvents)controlEvents;
 
