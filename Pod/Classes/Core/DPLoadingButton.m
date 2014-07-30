@@ -16,7 +16,8 @@
         }
 
 @interface DPLoadingButton () {
-    DPLoadingButtonAction _onButtonTap;
+    DPLoadingButtonAction _buttonAction;
+    DPLoadingButtonCompletionHandler _completionHandler;
 }
 
 @property(nonatomic, strong, readwrite) UIActivityIndicatorView *activityIndicatorView;
@@ -99,10 +100,17 @@
     });
 }
 
-- (void)onButtonTap:(DPLoadingButtonAction)block
+- (void)addAction:(DPLoadingButtonAction)action forControlEvents:(UIControlEvents)controlEvents
 {
-    _onButtonTap = [block copy];
-    [self addTarget:self action:@selector(buttonWasTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self addAction:action withCompletion:nil forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)addAction:(DPLoadingButtonAction)action withCompletion:(DPLoadingButtonCompletionHandler)completionHandler forControlEvents:(UIControlEvents)controlEvents
+{
+    _buttonAction = [action copy];
+    _completionHandler = [completionHandler copy];
+    
+    [self addTarget:self action:@selector(buttonWasTapped:) forControlEvents:controlEvents];
 }
 
 #pragma mark - Helpers
@@ -114,15 +122,21 @@
 
 - (void)buttonWasTapped:(id) sender
 {
-    if(_onButtonTap){
+    if(_buttonAction){
         [self startAnimating];
         
         __weak typeof(self) wSelf = self;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             __strong typeof(self) sSelf = wSelf;
-            _onButtonTap(sSelf);
+            _buttonAction(sSelf);
             
             [sSelf stopAnimating];
+            
+            if(_completionHandler){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _completionHandler(sSelf);
+                });
+            }
         });
     }
 }
@@ -135,6 +149,16 @@
 - (UIBarButtonItem *)toBarButtonItem
 {
     return [[UIBarButtonItem alloc] initWithCustomView:self];
+}
+
+@end
+
+
+@implementation DPLoadingButton (Deprecated)
+
+- (void)onButtonTap:(DPLoadingButtonAction)block
+{
+    [self addAction:block withCompletion:nil forControlEvents:UIControlEventTouchUpInside];
 }
 
 @end

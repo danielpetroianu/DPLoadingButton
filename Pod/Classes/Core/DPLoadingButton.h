@@ -10,7 +10,8 @@
 
 @class DPLoadingButton;
 
-typedef void (^DPLoadingButtonAction)(DPLoadingButton *button) ;
+typedef void (^DPLoadingButtonAction)(DPLoadingButton *button);
+typedef void (^DPLoadingButtonCompletionHandler)(DPLoadingButton *button);
 
 
 /**
@@ -76,12 +77,21 @@ typedef void (^DPLoadingButtonAction)(DPLoadingButton *button) ;
 - (instancetype)initWithCustomView:(UIView *)view;
 
 /**
- Register a block that will be run when the button is tapped.
- The block execution will be done on a background thread.
+ Register action blocks that will be executed when the specified controlEvents happen.
  
- @param block A block that will be executed on a background thread when the button is pressed.
+ @param action        A block that will be executed on a background thread on the button 'controlEvents'.
+ @param controlEvents A bitmask specifying the control events for which the action block is executed. @see UIControlEvents.
  */
-- (void)onButtonTap:(DPLoadingButtonAction)block;
+- (void)addAction:(DPLoadingButtonAction)action forControlEvents:(UIControlEvents)controlEvents;
+
+/**
+ Register action blocks that will be executed when the specified controlEvents happen.
+ 
+ @param action            A block that will be executed on a background thread on the button 'controlEvents'.
+ @param completionHandler A block that will be executed after the action block execution
+ @param controlEvents     A bitmask specifying the control events for which the action block is executed. @see UIControlEvents.
+ */
+- (void)addAction:(DPLoadingButtonAction)action withCompletion:(DPLoadingButtonCompletionHandler)completionHandler forControlEvents:(UIControlEvents)controlEvents;
 
 /**
  Calls the startAnimating methond on the activityIndicatorView.
@@ -109,6 +119,17 @@ typedef void (^DPLoadingButtonAction)(DPLoadingButton *button) ;
  @return A UIBarButtonItem with this DPLoadingButton as it's view.
  */
 - (UIBarButtonItem *)toBarButtonItem;
+
+@end
+
+@interface DPLoadingButton (Deprecated)
+/**
+ Register a block that will be run when the button is tapped.
+ The block execution will be done on a background thread.
+ 
+ @param block A block that will be executed on a background thread when the button is pressed.
+ */
+- (void)onButtonTap:(DPLoadingButtonAction)block DEPRECATED_MSG_ATTRIBUTE("use (void)addAction:(DPLoadingButtonAction)action forControlEvents:(UIControlEvents)controlEvents");
 
 @end
 
