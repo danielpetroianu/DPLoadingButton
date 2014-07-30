@@ -7,5 +7,8 @@ notifications:
 before_install:
   - brew update
   - brew install xctool
+install:
+  - cd Example
+  - pod install
 script:
   - xctool -workspace Example/DPLoadingButton.xcworkspace -scheme DPLoadingButton -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
