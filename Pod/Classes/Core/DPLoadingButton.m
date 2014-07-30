@@ -25,6 +25,9 @@
 
 @property(nonatomic, weak) UIView *buttonView;
 
+@property(nonatomic, copy) DPLoadingButtonAction buttonAction;
+@property(nonatomic, copy) DPLoadingButtonCompletionHandler completionHandler;
+
 @end
 
 @implementation DPLoadingButton
@@ -76,11 +79,10 @@
 - (void)startAnimating
 {
     dp_dispatch_main_async_safe(^{
-        [[self activityIndicatorView] setAlpha:0.2];
+        [[self activityIndicatorView] setAlpha:0.0];
         [[self activityIndicatorView] startAnimating];
-        [self setEnabled:NO];
         
-        [UIView animateWithDuration:0.3 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             [[self buttonView] setAlpha:0.2];
             [[self activityIndicatorView] setAlpha:1.0];
         }];
@@ -94,8 +96,6 @@
         
         [UIView animateWithDuration:0.3 animations:^{
             [[self buttonView] setAlpha:1];
-        } completion:^(BOOL finished) {
-            [self setEnabled:YES];
         }];
     });
 }
@@ -107,8 +107,8 @@
 
 - (void)addAction:(DPLoadingButtonAction)action withCompletion:(DPLoadingButtonCompletionHandler)completionHandler forControlEvents:(UIControlEvents)controlEvents
 {
-    _buttonAction = [action copy];
-    _completionHandler = [completionHandler copy];
+    [self setButtonAction: action];
+    [self setCompletionHandler:completionHandler];
     
     [self addTarget:self action:@selector(buttonWasTapped:) forControlEvents:controlEvents];
 }
@@ -122,21 +122,25 @@
 
 - (void)buttonWasTapped:(id) sender
 {
-    if(_buttonAction){
+    if([self buttonAction]){
+        [self setEnabled:NO];
         [self startAnimating];
         
         __weak typeof(self) wSelf = self;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             __strong typeof(self) sSelf = wSelf;
-            _buttonAction(sSelf);
+            if(!sSelf) { return; }
             
-            [sSelf stopAnimating];
+            [sSelf buttonAction](sSelf);
             
-            if(_completionHandler){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    _completionHandler(sSelf);
-                });
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [sSelf stopAnimating];
+                [sSelf setEnabled:YES];
+                
+                if([sSelf completionHandler]) {
+                    [sSelf completionHandler](sSelf);
+                }
+            });
         });
     }
 }

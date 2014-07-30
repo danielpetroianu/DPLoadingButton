@@ -29,7 +29,7 @@ typedef NSURLSessionTask *(^DPLoadingButtonURLSessionTaskAction)(DPLoadingButton
 /**
  Register a block that will return and AFURLConnectionOperation used to animate the UIActivityIndicatorView from the button.
  
- @param  [DPLoadingButtonRequestOperationAction] block A block of code that will be executed when the button is pressed
+ @param  block  A block of code that will be executed when the button is pressed
  */
 - (void)startRequestOperationOnButtonTap:(DPLoadingButtonRequestOperationAction)block;
 
@@ -40,7 +40,7 @@ typedef NSURLSessionTask *(^DPLoadingButtonURLSessionTaskAction)(DPLoadingButton
 /**
  Register a block that will return and NSURLSessionTask used to animate the UIActivityIndicatorView from the button.
  
- @param  [DPLoadingButtonURLSessionTaskAction] block A block of code that will be executed when the button is pressed
+ @param  block  A block of code that will be executed when the button is pressed
  */
 - (void)startTaskOnButtonTap:(DPLoadingButtonURLSessionTaskAction)block; NS_AVAILABLE_IOS(7.0);
 #endif

@@ -50,9 +50,9 @@ typedef void (^DPLoadingButtonCompletionHandler)(DPLoadingButton *button);
 /**
  Initializes a new item using the specified image.
  
- @return [DPLoadingButton] Returns an initialized DPLoadingButton object or nil if the object couldn't be created.
+ @return Returns an initialized DPLoadingButton object or nil if the object couldn't be created.
  
- @param  [UIImage] image The image to display in the button.
+ @param  image  The image to display in the button.
  
  @note   This method adjusts the frame of the button to match the size of the specified image.
  */
@@ -61,9 +61,9 @@ typedef void (^DPLoadingButtonCompletionHandler)(DPLoadingButton *button);
 /**
  Initializes a new item using the specified title.
 
- @return [DPLoadingButton] Returns an initialized DPLoadingButton object or nil if the object couldn't be created.
+ @return Returns an initialized DPLoadingButton object or nil if the object couldn't be created.
  
- @param  [NSString] title The text to display in the button.
+ @param  title  The text to display in the button.
  
  @note   This method adjusts the frame of the button to match the size of the specified title.
  */
@@ -72,9 +72,9 @@ typedef void (^DPLoadingButtonCompletionHandler)(DPLoadingButton *button);
 /**
  Initializes a new item using the specified custom view.
  
- @return [DPLoadingButton] Returns an initialized DPLoadingButton object or nil if the object couldn't be created.
+ @return Returns an initialized DPLoadingButton object or nil if the object couldn't be created.
  
- @param  [UIView] view A custom view representing the item.
+ @param  view   A custom view representing the item.
  
  @note   This method adjusts the frame of the button to match the size of the specified view. 
          It also disables user interactions for the custom view by default, so that the button control events could be recognised.
@@ -84,8 +84,8 @@ typedef void (^DPLoadingButtonCompletionHandler)(DPLoadingButton *button);
 /**
  Register action blocks that will be executed when the specified controlEvents happen.
  
- @param  [DPLoadingButtonAction] action        A block that will be executed on a background thread on the button 'controlEvents'.
- @param  [UIControlEvents] controlEvents A bitmask specifying the control events for which the action block is executed. @see UIControlEvents.
+ @param  action         A block that will be executed on a background thread on the button 'controlEvents'.
+ @param  controlEvents  A bitmask specifying the control events for which the action block is executed. @see UIControlEvents.
  
  @note   The 'action' block execution will be done on a background thread.
  */
@@ -94,9 +94,9 @@ typedef void (^DPLoadingButtonCompletionHandler)(DPLoadingButton *button);
 /**
  Register action blocks that will be executed when the specified controlEvents happen.
  
- @param  [DPLoadingButtonAction] action        A block that will be executed on a background thread on the button 'controlEvents'.
- @param  [DPLoadingButtonCompletionHandler] completionHandler A block that will be executed after the action block execution
- @param  [UIControlEvents] controlEvents A bitmask specifying the control events for which the action block is executed. @see UIControlEvents.
+ @param  action             A block that will be executed on a background thread on the button 'controlEvents'.
+ @param  completionHandler  A block that will be executed after the action block execution
+ @param  controlEvents      A bitmask specifying the control events for which the action block is executed. @see UIControlEvents.
  
  @note   The 'action' block execution will be done on a background thread and the 'completionHandler' block will be execution will be done on the main thread.
  */
@@ -129,7 +129,7 @@ typedef void (^DPLoadingButtonCompletionHandler)(DPLoadingButton *button);
 /**
  Helper method that will return an UIBarButtonItem.
  
- @return [UIBarButtonItem] A UIBarButtonItem with this DPLoadingButton as it's view.
+ @return A UIBarButtonItem with this DPLoadingButton as it's view.
  */
 - (UIBarButtonItem *)toBarButtonItem;
 
