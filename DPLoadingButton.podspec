@@ -3,9 +3,9 @@ Pod::Spec.new do |s|
   s.name                = "DPLoadingButton"
   s.version             = "0.1.0"
   s.license             = 'MIT'
-  s.summary             = "A 'button like' control that displayes a UIActivityIndicatorView when the button is tapped"
+  s.summary             = " A 'button like' control that displayes a UIActivityIndicatorView when the button fires a control event."
   s.description         = <<-DESC
-                          DPLoadingButton is a button like control, that will display an UIActivityIndicatorView until the action is over
+                          DPLoadingButton is a button like control, that will display an animating UIActivityIndicatorView automatically until the button action is done.
                           DESC
   s.homepage            = "https://github.com/danielpetroianu/DPLoadingButton"
   s.authors             = { "Petroianu Daniel" => "petroianudaniel@gmail.com" }
