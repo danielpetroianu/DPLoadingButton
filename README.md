@@ -23,7 +23,9 @@ DPLoadingButton is available through [CocoaPods](http://cocoapods.org). To insta
 it, simply add the following line to your Podfile:
 
     platform :ios, "6.0"
-    pod "DPLoadingButton"
+    
+    # Button like control with UIActivityIndicatorView as subview
+    pod "DPLoadingButton" , "~> 0.1.0"
 
 ## Author
 
@@ -32,9 +34,3 @@ Petroianu Daniel, petroianudaniel@gmail.com
 ## License
 
 DPLoadingButton is available under the MIT license. See the LICENSE file for more info.
-
-##To Do
-
-- write unit test
-- create subspec for AFNetworking
-- create subspec for PromiseKit
