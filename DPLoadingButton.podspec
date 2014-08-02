@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name                = "DPLoadingButton"
-  s.version             = "0.2.0"
+  s.version             = "0.2.1"
   s.license             = 'MIT'
   s.summary             = " A 'button like' control that displayes a UIActivityIndicatorView when the button fires a control event."
   s.description         = <<-DESC
@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'AFNetworking' do |ss|
     ss.dependency 'DPLoadingButton/Core'
-    ss.dependency 'AFNetworking', '~> 2.3.1'
+    ss.dependency 'AFNetworking', '>= 2.0'
 
     ss.public_header_files  = 'Pod/Classes/AFNetworking/*.h'
     ss.source_files         = 'Pod/Classes/AFNetworking'
