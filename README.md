@@ -25,7 +25,7 @@ it, simply add the following line to your Podfile:
     platform :ios, "6.0"
     
     # Button like control with UIActivityIndicatorView as subview
-    pod "DPLoadingButton" , "~> 0.1.0"
+    pod "DPLoadingButton" , "~> 0.2.0"
 
 ## Author
 
