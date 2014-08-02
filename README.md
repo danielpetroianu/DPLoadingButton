@@ -1,4 +1,4 @@
-<h1><img src="https://raw.githubusercontent.com/danielpetroianu/DPLoadingButton/master/Example/DPLoadingButton/Images.xcassets/AppIcon.appiconset/AppIcon29x29@2x.png" alt="DPLoadingButton"/> DPLoadingButton <img src="https://img.shields.io/badge/status-in_progres-red.svg?style=flat"/></h1>
+<h1><img src="https://raw.githubusercontent.com/danielpetroianu/DPLoadingButton/master/Example/DPLoadingButton/Images.xcassets/AppIcon.appiconset/AppIcon29x29@2x.png" alt="DPLoadingButton"/> DPLoadingButton
 
 [![CI Status](http://img.shields.io/travis/danielpetroianu/DPLoadingButton.svg?style=flat)](https://travis-ci.org/danielpetroianu/DPLoadingButton)
 [![Version](https://img.shields.io/cocoapods/v/DPLoadingButton.svg?style=flat)](http://cocoadocs.org/docsets/DPLoadingButton)
