@@ -23,6 +23,7 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		6B5530FE198043330064AD74 /* DPCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B5530FC198043330064AD74 /* DPCustomView.xib */; };
+		6B614B201988310A00A3E36C /* DPDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B614B1F1988310A00A3E36C /* DPDetailsViewController.m */; };
 		8F161D5A14FF4CDFB666B803 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 487B652341C148BD9F726D0B /* libPods-Tests.a */; };
 		FD038FA1662F4A47A7F44C3E /* libPods-DPLoadingButton.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B91FC637BC74F3FAF66E33C /* libPods-DPLoadingButton.a */; };
 /* End PBXBuildFile section */
@@ -62,6 +63,8 @@
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		6B5530FC198043330064AD74 /* DPCustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DPCustomView.xib; sourceTree = "<group>"; };
+		6B614B1E1988310A00A3E36C /* DPDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPDetailsViewController.h; sourceTree = "<group>"; };
+		6B614B1F1988310A00A3E36C /* DPDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPDetailsViewController.m; sourceTree = "<group>"; };
 		7B91FC637BC74F3FAF66E33C /* libPods-DPLoadingButton.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DPLoadingButton.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D371F04EC045FABBC024CE /* DPLoadingButton.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = DPLoadingButton.podspec; path = ../DPLoadingButton.podspec; sourceTree = "<group>"; };
 		99E82103D69C4F06826DBF29 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -134,11 +137,10 @@
 			isa = PBXGroup;
 			children = (
 				6B5530FF198046F00064AD74 /* Views */,
+				6B614B1D198830CC00A3E36C /* ViewControllers */,
+				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F59C195388D20070C39A /* DPAppDelegate.h */,
 				6003F59D195388D20070C39A /* DPAppDelegate.m */,
-				6003F5A5195388D20070C39A /* DPViewController.h */,
-				6003F5A6195388D20070C39A /* DPViewController.m */,
-				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
 			path = DPLoadingButton;
@@ -192,6 +194,17 @@
 				6003F5A2195388D20070C39A /* Main_iPad.storyboard */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		6B614B1D198830CC00A3E36C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6003F5A5195388D20070C39A /* DPViewController.h */,
+				6003F5A6195388D20070C39A /* DPViewController.m */,
+				6B614B1E1988310A00A3E36C /* DPDetailsViewController.h */,
+				6B614B1F1988310A00A3E36C /* DPDetailsViewController.m */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,6 +390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* DPAppDelegate.m in Sources */,
+				6B614B201988310A00A3E36C /* DPDetailsViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* DPViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);

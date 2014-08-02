@@ -7,85 +7,131 @@
 //
 
 #import "DPViewController.h"
-#import <DPLoadingButton/DPLoadingButton.h>
+#import "DPDetailsViewController.h"
+#import <AFNetworking/AFNetworking.h>
 
-@interface DPViewController ()
-@property(nonatomic, weak) IBOutlet DPLoadingButton *brewCoffeeButton;
+@interface DPViewController () {
+    AFHTTPRequestOperationManager *_reqManager;
+}
+@property(nonatomic, strong) NSArray *dummyData;
 @end
 
 @implementation DPViewController
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        NSURL *baseUrl = [NSURL URLWithString:@"http://filltext.com/"];
+        _reqManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseUrl];
+        _dummyData = [[NSArray alloc] initWithObjects:
+                      @"Espresso",
+                      @"Cappuccino",
+                      @"Americano",
+                      @"Caffe Latte",
+                      @"Caf au Lait",
+                      @"Caf Mocha (Mochachino)",
+                      @"Caramel Macchiato", nil];
+    }
+    
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [[self navigationItem] setLeftBarButtonItem:[self createLeftBarButtonItem]];
-	[[self navigationItem] setRightBarButtonItem:[self createRightBarButtonItem]];
-    
-    DPLoadingButton *customViewButton = [self createCustomViewButton];
-    [[self view] addSubview:customViewButton];
-    [self setBrewCoffeeButton:customViewButton];
+    [[self navigationItem] setLeftBarButtonItem:[self createLoadingBarButtonItemWithText]];
+	[[self navigationItem] setRightBarButtonItem:[self createLoadingBarButtonItemWithImage]];
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-                                         duration:(NSTimeInterval)duration
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [[self brewCoffeeButton] setCenter:[[self view] center]];
+    if ([[segue identifier] isEqualToString:@"ShowDetailsSegue"])
+    {
+        DPDetailsViewController *destViewController = (DPDetailsViewController *)[segue destinationViewController];
+        [destViewController setDetailsText:@"dasdasda"];
+    }
 }
 
 
+#pragma mark - 
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [[self dummyData] count];
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+    [[cell textLabel] setText:[[self dummyData] objectAtIndex:[indexPath row]]];
+    
+    UIImage *image = [UIImage imageNamed:@"coffee"];
+    DPLoadingButton *disclosure = [[DPLoadingButton alloc] initWithImage:image];
+    [[disclosure activityIndicatorView] setColor:[UIColor grayColor]];
+    
+    [disclosure addTarget:self action:@selector(dpLoadingButton_manualy_animated:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [cell setAccessoryView:disclosure];
+    
+    return cell;
+}
 
 
-- (UIBarButtonItem *)createLeftBarButtonItem {
+#pragma mark -
+
+- (UIBarButtonItem *)createLoadingBarButtonItemWithText {
+    // Example of DPLoadingButton created with text
+    
     NSString *title = @"work";
     DPLoadingButton *leftButton = [[DPLoadingButton alloc] initWithTitle:title];
     [[leftButton titleLable] setTextColor:[UIColor redColor]];
     [[leftButton activityIndicatorView] setColor:[UIColor redColor]];
-    [leftButton onButtonTap:^(DPLoadingButton *button){
+    
+    [leftButton addAction:^(DPLoadingButton *button) {
         NSLog(@"left button was tapped");
-        [NSThread sleepForTimeInterval:6];
-    }];
+        [NSThread sleepForTimeInterval:0.5];
+    } forControlEvents:UIControlEventTouchUpInside];
     
     return [leftButton toBarButtonItem];
 }
 
-- (UIBarButtonItem *)createRightBarButtonItem {
+- (UIBarButtonItem *)createLoadingBarButtonItemWithImage {
+    // Example of DPLoadingButton created with image
+    
     UIImage *image = [UIImage imageNamed:@"coffee"];
     DPLoadingButton *rightButton = [[DPLoadingButton alloc] initWithImage:image];
     [[rightButton activityIndicatorView] setColor:[UIColor blackColor]];
     
-    [rightButton onButtonTap:^(DPLoadingButton *button){
+    [rightButton addAction:^(DPLoadingButton *button){
+        
         NSLog(@"right button was tapped");
         [NSThread sleepForTimeInterval:2];
-    }];
+        
+    } withCompletion:^(DPLoadingButton *button){
+        
+        NSLog(@"right button finished running acction");
+        
+    } forControlEvents:UIControlEventTouchUpInside];
     
     return [rightButton toBarButtonItem];
 }
 
-- (DPLoadingButton *)createCustomViewButton {
-    UINib *nib = [UINib nibWithNibName:@"DPCustomView" bundle:nil];
-    UIView *customView = [[nib instantiateWithOwner:nil options:nil] firstObject];
+- (void)dpLoadingButton_manualy_animated:(DPLoadingButton *)sender {
+    [[_reqManager operationQueue] cancelAllOperations];
+    [sender startAnimating];
     
-    DPLoadingButton *button = [[DPLoadingButton alloc] initWithCustomView:customView];
-    [[button activityIndicatorView] setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [[button activityIndicatorView] setColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]];
-    
-    [button setCenter:[[self view] center]];
-    
-    [button onButtonTap:^(DPLoadingButton *button){
-        NSLog(@"custom view buton was tapped");
-        [NSThread sleepForTimeInterval:2];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertView *alertView = [[UIAlertView alloc] init];
-            [alertView setMessage:@"Go get your coffee."];
-            [alertView addButtonWithTitle:@"I'm going"];
-            [alertView show];
-        });
-    }];
-    
-    return button;
-}
+    NSDictionary *params = @{ @"rows": @1, @"delay": @1 };
 
+    [_reqManager GET:@"/" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [sender stopAnimating];
+        [self performSegueWithIdentifier:@"ShowDetailsSegue" sender:sender];
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [sender stopAnimating];
+    
+    }];
+}
 
 @end

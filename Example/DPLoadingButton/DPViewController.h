@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Petroianu Daniel. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-@interface DPViewController : UIViewController
+@interface DPViewController : UITableViewController
 
 @end

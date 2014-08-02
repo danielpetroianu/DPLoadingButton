@@ -13,4 +13,7 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+
+    #import <DPLoadingButton/DPLoadingButton.h>
+    #import <DPLoadingButton/DPLoadingButton+AFNetworking.h>
 #endif
