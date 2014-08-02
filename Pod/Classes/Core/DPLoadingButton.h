@@ -119,9 +119,9 @@ typedef void (^DPLoadingButtonCompletionHandler)(DPLoadingButton *button);
  @note   The 'action' block execution will be done on a background thread and the 'completionHandler' block will be execution will be done on the main thread.
  
  @warning
- The 'action' and 'completionHandler' are saved in an internal property and it might/will cause a retain cicle.
- Use the 'weakSelf' - 'strongSelf' pattern when refering to 'self' inside the blocks.
- More info: http://blackpixel.com/blog/2014/03/capturing-myself.html
+     The 'action' and 'completionHandler' are saved in an internal property and it might/will cause a retain cicle.
+     Use the 'weakSelf' - 'strongSelf' pattern when refering to 'self' inside the blocks.
+     More info: http://blackpixel.com/blog/2014/03/capturing-myself.html
  */
 - (void)addAction:(DPLoadingButtonAction)action withCompletion:(DPLoadingButtonCompletionHandler)completionHandler;
 

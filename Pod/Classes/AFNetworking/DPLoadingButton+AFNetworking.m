@@ -24,12 +24,12 @@ static char NSURLSessionTaskButtonTapBlock;
 
 #pragma mark - AFURLConnectionOperation
 
-- (void)startRequestOperationOnButtonTap:(DPLoadingButtonRequestOperationAction)block {
+- (void)startAnimatingWithRequestOperation:(DPLoadingButtonRequestOperationAction)block forControlEvents:(UIControlEvents)controlEvents{
     [self willChangeValueForKey:@"RequestOperationButtonTapBlock"];
     objc_setAssociatedObject(self, &RequestOperationButtonTapBlock, block, OBJC_ASSOCIATION_COPY_NONATOMIC);
     [self didChangeValueForKey:@"RequestOperationButtonTapBlock"];
     
-    [self addTarget:self action:@selector(dp_requestOperation_onButtonTap:) forControlEvents:UIControlEventTouchUpInside];
+    [self addTarget:self action:@selector(dp_requestOperation_onButtonTap:) forControlEvents:controlEvents];
 }
 
 - (void)dp_requestOperation_onButtonTap:(id)sender {
@@ -62,12 +62,12 @@ static char NSURLSessionTaskButtonTapBlock;
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 
-- (void)startTaskOnButtonTap:(DPLoadingButtonURLSessionTaskAction)block {
+- (void)startAnimatingWithTask:(DPLoadingButtonURLSessionTaskAction)block forControlEvents:(UIControlEvents)controlEvents {
     [self willChangeValueForKey:@"NSURLSessionTaskButtonTapBlock"];
     objc_setAssociatedObject(self, &NSURLSessionTaskButtonTapBlock, block, OBJC_ASSOCIATION_COPY_NONATOMIC);
     [self didChangeValueForKey:@"NSURLSessionTaskButtonTapBlock"];
     
-    [self addTarget:self action:@selector(dp_sessionTask_onButtonTap:) forControlEvents:UIControlEventTouchUpInside];
+    [self addTarget:self action:@selector(dp_sessionTask_onButtonTap:) forControlEvents:controlEvents];
 }
 
 - (void)dp_sessionTask_onButtonTap:(id)sender {
@@ -99,6 +99,24 @@ static char NSURLSessionTaskButtonTapBlock;
 
 #endif
 
+@end
+
+@implementation DPLoadingButton (AFNetworking_Deprecated)
+
+- (void)startRequestOperationOnButtonTap:(DPLoadingButtonRequestOperationAction)block
+{
+    [self startAnimatingWithRequestOperation:block forControlEvents:UIControlEventTouchUpInside];
+}
+
+
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+
+- (void)startTaskOnButtonTap:(DPLoadingButtonURLSessionTaskAction)block {
+    [self startAnimatingWithTask:block forControlEvents:UIControlEventTouchUpInside];
+};
+
+#endif
 
 @end
 
