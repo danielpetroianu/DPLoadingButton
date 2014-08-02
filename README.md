@@ -25,7 +25,7 @@ it, simply add the following line to your Podfile:
     platform :ios, "6.0"
     
     # A 'button like' control that displayes a UIActivityIndicatorView when the button fires a control event.
-    pod "DPLoadingButton" , "~> 0.2.0"
+    pod 'DPLoadingButton', '~> 0.2.0'
 
 ## Author
 
