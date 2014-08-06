@@ -8,6 +8,4 @@
 
 @interface DPDetailsViewController : UIViewController
 
-@property(nonatomic, copy) NSString *detailsText;
-
 @end

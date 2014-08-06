@@ -48,9 +48,10 @@
     [[button activityIndicatorView] setColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]];
     
     [button addAction:^(DPLoadingButton *button){
-        NSLog(@"custom view buton was tapped");
+        NSLog(@"custom view button was tapped %@", button);
         [NSThread sleepForTimeInterval:2];
     } withCompletion:^(DPLoadingButton *button) {
+        NSLog(@"custom view button finished running action %@", button);
         UIAlertView *alertView = [[UIAlertView alloc] init];
         [alertView setMessage:@"Go get your coffee."];
         [alertView addButtonWithTitle:@"I'm going"];

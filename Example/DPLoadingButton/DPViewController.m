@@ -45,16 +45,6 @@
 	[[self navigationItem] setRightBarButtonItem:[self createLoadingBarButtonItemWithImage]];
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"ShowDetailsSegue"])
-    {
-        DPDetailsViewController *destViewController = (DPDetailsViewController *)[segue destinationViewController];
-        [destViewController setDetailsText:@"dasdasda"];
-    }
-}
-
-
 #pragma mark - 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -90,7 +80,7 @@
     [[leftButton activityIndicatorView] setColor:[UIColor redColor]];
     
     [leftButton addAction:^(DPLoadingButton *button) {
-        NSLog(@"left button was tapped");
+        NSLog(@"left button was tapped %@", button);
         [NSThread sleepForTimeInterval:0.5];
     } forControlEvents:UIControlEventTouchUpInside];
     
@@ -106,12 +96,12 @@
     
     [rightButton addAction:^(DPLoadingButton *button){
         
-        NSLog(@"right button was tapped");
+        NSLog(@"right button was tapped %@", button);
         [NSThread sleepForTimeInterval:2];
         
     } withCompletion:^(DPLoadingButton *button){
         
-        NSLog(@"right button finished running acction");
+        NSLog(@"right button finished running action %@", button);
         
     } forControlEvents:UIControlEventTouchUpInside];
     
@@ -119,6 +109,7 @@
 }
 
 - (void)dpLoadingButton_manualy_animated:(DPLoadingButton *)sender {
+    NSLog(@"manualy animating button %@", sender);
     [[_reqManager operationQueue] cancelAllOperations];
     [sender startAnimating];
     
