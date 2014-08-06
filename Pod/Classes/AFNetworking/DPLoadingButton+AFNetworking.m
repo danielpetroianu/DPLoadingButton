@@ -14,15 +14,7 @@
 #import <AFNetworking/AFURLConnectionOperation.h>
 static char RequestOperationButtonTapBlock;
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-#import <AFNetworking/AFURLSessionManager.h>
-static char NSURLSessionTaskButtonTapBlock;
-#endif
-
-
-@implementation DPLoadingButton (AFNetworking)
-
-#pragma mark - AFURLConnectionOperation
+@implementation DPLoadingButton (AFNetworking_RequestOperation)
 
 - (void)startAnimatingWithRequestOperation:(DPLoadingButtonRequestOperationAction)block forControlEvents:(UIControlEvents)controlEvents{
     [self willChangeValueForKey:@"RequestOperationButtonTapBlock"];
@@ -31,6 +23,8 @@ static char NSURLSessionTaskButtonTapBlock;
     
     [self addTarget:self action:@selector(dp_requestOperation_onButtonTap:) forControlEvents:controlEvents];
 }
+
+#pragma mark - Helpers
 
 - (void)dp_requestOperation_onButtonTap:(id)sender {
     DPLoadingButtonRequestOperationAction block = objc_getAssociatedObject(self, &RequestOperationButtonTapBlock);
@@ -57,10 +51,15 @@ static char NSURLSessionTaskButtonTapBlock;
     }
 }
 
+@end
 
-#pragma mark - NSURLSessionTask
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+
+#import <AFNetworking/AFURLSessionManager.h>
+static char NSURLSessionTaskButtonTapBlock;
+
+@implementation DPLoadingButton (AFNetworking_SessionTask)
 
 - (void)startAnimatingWithTask:(DPLoadingButtonURLSessionTaskAction)block forControlEvents:(UIControlEvents)controlEvents {
     [self willChangeValueForKey:@"NSURLSessionTaskButtonTapBlock"];
@@ -69,6 +68,8 @@ static char NSURLSessionTaskButtonTapBlock;
     
     [self addTarget:self action:@selector(dp_sessionTask_onButtonTap:) forControlEvents:controlEvents];
 }
+
+#pragma mark - Helpers
 
 - (void)dp_sessionTask_onButtonTap:(id)sender {
     DPLoadingButtonURLSessionTaskAction block = objc_getAssociatedObject(self, &NSURLSessionTaskButtonTapBlock);
@@ -97,9 +98,10 @@ static char NSURLSessionTaskButtonTapBlock;
     }
 }
 
+@end
+
 #endif
 
-@end
 
 @implementation DPLoadingButton (AFNetworking_Deprecated)
 

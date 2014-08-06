@@ -100,6 +100,8 @@
     });
 }
 
+#pragma mark - Methods
+
 - (void)addAction:(DPLoadingButtonAction)action
 {
     [self addAction:action withCompletion:nil forControlEvents:UIControlEventTouchUpInside];
