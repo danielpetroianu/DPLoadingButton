@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name                = "DPLoadingButton"
-  s.version             = "0.2.1"
+  s.version             = "0.2.2"
   s.license             = 'MIT'
   s.summary             = " A 'button like' control that displayes a UIActivityIndicatorView when the button fires a control event."
   s.description         = <<-DESC
