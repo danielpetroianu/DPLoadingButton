@@ -130,13 +130,25 @@ typedef void (^DPLoadingButtonCompletionHandler)(DPLoadingButton *button);
  *
  *  @param   action             A block that will be executed on a background thread on the button `controlEvents`.
  *  @param   completionHandler  A block that will be executed after the action block execution
- *  @param   controlEvents      A bitmask specifying the control events for which the action block is executed. @see UIControlEvents.
+ *  @param   controlEvents      A bitmask specifying the control events for which the action block is executed. @see `UIControlEvents`.
  *
  *  @note    The `DPLoadingButtonAction` block execution will be done on a background thread and the `DPLoadingButtonCompletionHandler` block will be execution will be done on the main thread.
  *
  *  @warning The `DPLoadingButtonAction` and `DPLoadingButtonCompletionHandler` are saved in an internal property and it might/will cause a retain cicle. Use the 'weakSelf' - 'strongSelf' pattern when refering to `self` inside the blocks. More info: http://blackpixel.com/blog/2014/03/capturing-myself.html
  */
 - (void)addAction:(DPLoadingButtonAction)action withCompletion:(DPLoadingButtonCompletionHandler)completionHandler forControlEvents:(UIControlEvents)controlEvents;
+
+/**
+ *  Remove all actions added to this control.
+ */
+- (void)removeAllActions;
+
+/**
+ *  Remove action added for controlEvents
+ *
+ *  @param controlEvents A bitmask specifying the control events for which the action block is executed. @see `UIControlEvents`.
+ */
+- (void)removeActionForControlEvents:(UIControlEvents)controlEvents;
 
 /**
  * Calls the startAnimating methond on the activityIndicatorView.
@@ -157,9 +169,6 @@ typedef void (^DPLoadingButtonCompletionHandler)(DPLoadingButton *button);
 @end
 
 
-/**
- *  UIKit helpers
- */
 @interface DPLoadingButton (UIKit)
 
 /**
